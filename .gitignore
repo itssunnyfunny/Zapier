@@ -1,0 +1,26 @@
+# Ignore all node_modules in all subfolders
+**/node_modules/
+
+# Ignore common build folders and files
+**/dist/
+**/build/
+**/.next/
+**/.turbo/
+
+# Ignore log files
+**/*.log
+
+# Ignore environment files
+**/.env
+**/.env.*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE folders
+.vscode/
+.idea/
+
+# TypeScript build output
+**/*.tsbuildinfo
