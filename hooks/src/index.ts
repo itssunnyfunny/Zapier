@@ -10,7 +10,7 @@ const port = 3000;
 
 // password protection middleware
 
-app.post("/hooks/catch:userId/:zapId", async(req, res) => {  
+app.post("/hooks/catch/:userId/:zapId", async(req, res) => {  
   const { userId, zapId } = req.params;
   const { body } = req;
   console.log(`Received webhook for userId: ${userId}, zapId: ${zapId}`);
