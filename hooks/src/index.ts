@@ -15,12 +15,13 @@ app.post("/hooks/catch:userId/:zapId", async(req, res) => {
   const { body } = req;
   console.log(`Received webhook for userId: ${userId}, zapId: ${zapId}`);
   console.log("Request body:", body); 
-  
+
    //@ts-ignore
      await client.$transacton(async tx => {
       const run  = await client.zapRun.create({
         data: { 
           zapId: zapId,
+          metadata: body
         }
       });
 

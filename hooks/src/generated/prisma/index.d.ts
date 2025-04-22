@@ -8081,6 +8081,7 @@ export namespace Prisma {
   export type ZapRunCountAggregateOutputType = {
     id: number
     zapId: number
+    metadata: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -8104,6 +8105,7 @@ export namespace Prisma {
   export type ZapRunCountAggregateInputType = {
     id?: true
     zapId?: true
+    metadata?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -8184,6 +8186,7 @@ export namespace Prisma {
   export type ZapRunGroupByOutputType = {
     id: string
     zapId: string
+    metadata: JsonValue
     createdAt: Date
     updatedAt: Date
     _count: ZapRunCountAggregateOutputType | null
@@ -8208,6 +8211,7 @@ export namespace Prisma {
   export type zapRunSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     zapId?: boolean
+    metadata?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     zap?: boolean | ZapDefaultArgs<ExtArgs>
@@ -8217,6 +8221,7 @@ export namespace Prisma {
   export type zapRunSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     zapId?: boolean
+    metadata?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     zap?: boolean | ZapDefaultArgs<ExtArgs>
@@ -8225,6 +8230,7 @@ export namespace Prisma {
   export type zapRunSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     zapId?: boolean
+    metadata?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     zap?: boolean | ZapDefaultArgs<ExtArgs>
@@ -8233,11 +8239,12 @@ export namespace Prisma {
   export type zapRunSelectScalar = {
     id?: boolean
     zapId?: boolean
+    metadata?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type zapRunOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "zapId" | "createdAt" | "updatedAt", ExtArgs["result"]["zapRun"]>
+  export type zapRunOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "zapId" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["zapRun"]>
   export type zapRunInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     zap?: boolean | ZapDefaultArgs<ExtArgs>
     zapRunOutbox?: boolean | zapRun$zapRunOutboxArgs<ExtArgs>
@@ -8258,6 +8265,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       zapId: string
+      metadata: Prisma.JsonValue
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["zapRun"]>
@@ -8687,6 +8695,7 @@ export namespace Prisma {
   interface zapRunFieldRefs {
     readonly id: FieldRef<"zapRun", 'String'>
     readonly zapId: FieldRef<"zapRun", 'String'>
+    readonly metadata: FieldRef<"zapRun", 'Json'>
     readonly createdAt: FieldRef<"zapRun", 'DateTime'>
     readonly updatedAt: FieldRef<"zapRun", 'DateTime'>
   }
@@ -10245,6 +10254,7 @@ export namespace Prisma {
   export const ZapRunScalarFieldEnum: {
     id: 'id',
     zapId: 'zapId',
+    metadata: 'metadata',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -10270,6 +10280,13 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -10284,6 +10301,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -10316,6 +10342,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -10662,6 +10702,7 @@ export namespace Prisma {
     NOT?: zapRunWhereInput | zapRunWhereInput[]
     id?: StringFilter<"zapRun"> | string
     zapId?: StringFilter<"zapRun"> | string
+    metadata?: JsonFilter<"zapRun">
     createdAt?: DateTimeFilter<"zapRun"> | Date | string
     updatedAt?: DateTimeFilter<"zapRun"> | Date | string
     zap?: XOR<ZapScalarRelationFilter, ZapWhereInput>
@@ -10671,6 +10712,7 @@ export namespace Prisma {
   export type zapRunOrderByWithRelationInput = {
     id?: SortOrder
     zapId?: SortOrder
+    metadata?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     zap?: ZapOrderByWithRelationInput
@@ -10683,6 +10725,7 @@ export namespace Prisma {
     OR?: zapRunWhereInput[]
     NOT?: zapRunWhereInput | zapRunWhereInput[]
     zapId?: StringFilter<"zapRun"> | string
+    metadata?: JsonFilter<"zapRun">
     createdAt?: DateTimeFilter<"zapRun"> | Date | string
     updatedAt?: DateTimeFilter<"zapRun"> | Date | string
     zap?: XOR<ZapScalarRelationFilter, ZapWhereInput>
@@ -10692,6 +10735,7 @@ export namespace Prisma {
   export type zapRunOrderByWithAggregationInput = {
     id?: SortOrder
     zapId?: SortOrder
+    metadata?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: zapRunCountOrderByAggregateInput
@@ -10705,6 +10749,7 @@ export namespace Prisma {
     NOT?: zapRunScalarWhereWithAggregatesInput | zapRunScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"zapRun"> | string
     zapId?: StringWithAggregatesFilter<"zapRun"> | string
+    metadata?: JsonWithAggregatesFilter<"zapRun">
     createdAt?: DateTimeWithAggregatesFilter<"zapRun"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"zapRun"> | Date | string
   }
@@ -11081,6 +11126,7 @@ export namespace Prisma {
 
   export type zapRunCreateInput = {
     id?: string
+    metadata: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     zap: ZapCreateNestedOneWithoutZapRunInput
@@ -11090,6 +11136,7 @@ export namespace Prisma {
   export type zapRunUncheckedCreateInput = {
     id?: string
     zapId: string
+    metadata: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     zapRunOutbox?: ZapRunOutboxUncheckedCreateNestedOneWithoutZapRunInput
@@ -11097,6 +11144,7 @@ export namespace Prisma {
 
   export type zapRunUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    metadata?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     zap?: ZapUpdateOneRequiredWithoutZapRunNestedInput
@@ -11106,6 +11154,7 @@ export namespace Prisma {
   export type zapRunUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     zapId?: StringFieldUpdateOperationsInput | string
+    metadata?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     zapRunOutbox?: ZapRunOutboxUncheckedUpdateOneWithoutZapRunNestedInput
@@ -11114,12 +11163,14 @@ export namespace Prisma {
   export type zapRunCreateManyInput = {
     id?: string
     zapId: string
+    metadata: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type zapRunUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    metadata?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11127,6 +11178,7 @@ export namespace Prisma {
   export type zapRunUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     zapId?: StringFieldUpdateOperationsInput | string
+    metadata?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11468,6 +11520,29 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type ZapRunOutboxNullableScalarRelationFilter = {
     is?: ZapRunOutboxWhereInput | null
@@ -11477,6 +11552,7 @@ export namespace Prisma {
   export type zapRunCountOrderByAggregateInput = {
     id?: SortOrder
     zapId?: SortOrder
+    metadata?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11493,6 +11569,32 @@ export namespace Prisma {
     zapId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type ZapRunScalarRelationFilter = {
@@ -12013,6 +12115,29 @@ export namespace Prisma {
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type ZapCreateWithoutUserInput = {
     id?: string
@@ -12106,6 +12231,7 @@ export namespace Prisma {
 
   export type zapRunCreateWithoutZapInput = {
     id?: string
+    metadata: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     zapRunOutbox?: ZapRunOutboxCreateNestedOneWithoutZapRunInput
@@ -12113,6 +12239,7 @@ export namespace Prisma {
 
   export type zapRunUncheckedCreateWithoutZapInput = {
     id?: string
+    metadata: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     zapRunOutbox?: ZapRunOutboxUncheckedCreateNestedOneWithoutZapRunInput
@@ -12221,6 +12348,7 @@ export namespace Prisma {
     NOT?: zapRunScalarWhereInput | zapRunScalarWhereInput[]
     id?: StringFilter<"zapRun"> | string
     zapId?: StringFilter<"zapRun"> | string
+    metadata?: JsonFilter<"zapRun">
     createdAt?: DateTimeFilter<"zapRun"> | Date | string
     updatedAt?: DateTimeFilter<"zapRun"> | Date | string
   }
@@ -12613,6 +12741,7 @@ export namespace Prisma {
 
   export type zapRunCreateWithoutZapRunOutboxInput = {
     id?: string
+    metadata: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     zap: ZapCreateNestedOneWithoutZapRunInput
@@ -12621,6 +12750,7 @@ export namespace Prisma {
   export type zapRunUncheckedCreateWithoutZapRunOutboxInput = {
     id?: string
     zapId: string
+    metadata: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12643,6 +12773,7 @@ export namespace Prisma {
 
   export type zapRunUpdateWithoutZapRunOutboxInput = {
     id?: StringFieldUpdateOperationsInput | string
+    metadata?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     zap?: ZapUpdateOneRequiredWithoutZapRunNestedInput
@@ -12651,6 +12782,7 @@ export namespace Prisma {
   export type zapRunUncheckedUpdateWithoutZapRunOutboxInput = {
     id?: StringFieldUpdateOperationsInput | string
     zapId?: StringFieldUpdateOperationsInput | string
+    metadata?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12690,6 +12822,7 @@ export namespace Prisma {
 
   export type zapRunCreateManyZapInput = {
     id?: string
+    metadata: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12717,6 +12850,7 @@ export namespace Prisma {
 
   export type zapRunUpdateWithoutZapInput = {
     id?: StringFieldUpdateOperationsInput | string
+    metadata?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     zapRunOutbox?: ZapRunOutboxUpdateOneWithoutZapRunNestedInput
@@ -12724,6 +12858,7 @@ export namespace Prisma {
 
   export type zapRunUncheckedUpdateWithoutZapInput = {
     id?: StringFieldUpdateOperationsInput | string
+    metadata?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     zapRunOutbox?: ZapRunOutboxUncheckedUpdateOneWithoutZapRunNestedInput
@@ -12731,6 +12866,7 @@ export namespace Prisma {
 
   export type zapRunUncheckedUpdateManyWithoutZapInput = {
     id?: StringFieldUpdateOperationsInput | string
+    metadata?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

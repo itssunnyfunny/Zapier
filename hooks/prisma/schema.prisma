@@ -71,6 +71,7 @@ model AvailableTrigger {
  model zapRun {
   id        String   @id @default(uuid())
   zapId     String
+  metadata  Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   zap       Zap      @relation(fields: [zapId], references: [id])
