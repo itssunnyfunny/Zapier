@@ -16,21 +16,30 @@ app.post("/hooks/catch:userId/:zapId", async(req, res) => {
   console.log(`Received webhook for userId: ${userId}, zapId: ${zapId}`);
   console.log("Request body:", body); 
 
-   //@ts-ignore
+   // @ts-ignore
      await client.$transacton(async tx => {
-      const run  = await client.zapRun.create({
+      const run  = await tx.zapRun.create({
         data: { 
           zapId: zapId,
           metadata: body
         }
       });
 
-      await client.zapRunOutbox.create({
+      await tx.zapRunOutbox.create({
         data: {
           zapRunId: run.id,
         }
       });
     }
-     )
+
+     );
+     res.json({
+      message: "Webhook received successfully",   
+     })
     
 } )
+
+
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
