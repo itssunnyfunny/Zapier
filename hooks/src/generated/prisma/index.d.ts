@@ -4880,14 +4880,25 @@ export namespace Prisma {
 
   export type AggregateAction = {
     _count: ActionCountAggregateOutputType | null
+    _avg: ActionAvgAggregateOutputType | null
+    _sum: ActionSumAggregateOutputType | null
     _min: ActionMinAggregateOutputType | null
     _max: ActionMaxAggregateOutputType | null
+  }
+
+  export type ActionAvgAggregateOutputType = {
+    sortingOrder: number | null
+  }
+
+  export type ActionSumAggregateOutputType = {
+    sortingOrder: number | null
   }
 
   export type ActionMinAggregateOutputType = {
     id: string | null
     actionId: string | null
     zapId: string | null
+    sortingOrder: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4896,6 +4907,7 @@ export namespace Prisma {
     id: string | null
     actionId: string | null
     zapId: string | null
+    sortingOrder: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4904,16 +4916,26 @@ export namespace Prisma {
     id: number
     actionId: number
     zapId: number
+    sortingOrder: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
 
+  export type ActionAvgAggregateInputType = {
+    sortingOrder?: true
+  }
+
+  export type ActionSumAggregateInputType = {
+    sortingOrder?: true
+  }
+
   export type ActionMinAggregateInputType = {
     id?: true
     actionId?: true
     zapId?: true
+    sortingOrder?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4922,6 +4944,7 @@ export namespace Prisma {
     id?: true
     actionId?: true
     zapId?: true
+    sortingOrder?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4930,6 +4953,7 @@ export namespace Prisma {
     id?: true
     actionId?: true
     zapId?: true
+    sortingOrder?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4973,6 +4997,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ActionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ActionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ActionMinAggregateInputType
@@ -5003,6 +5039,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ActionCountAggregateInputType | true
+    _avg?: ActionAvgAggregateInputType
+    _sum?: ActionSumAggregateInputType
     _min?: ActionMinAggregateInputType
     _max?: ActionMaxAggregateInputType
   }
@@ -5011,9 +5049,12 @@ export namespace Prisma {
     id: string
     actionId: string
     zapId: string
+    sortingOrder: number
     createdAt: Date
     updatedAt: Date
     _count: ActionCountAggregateOutputType | null
+    _avg: ActionAvgAggregateOutputType | null
+    _sum: ActionSumAggregateOutputType | null
     _min: ActionMinAggregateOutputType | null
     _max: ActionMaxAggregateOutputType | null
   }
@@ -5036,6 +5077,7 @@ export namespace Prisma {
     id?: boolean
     actionId?: boolean
     zapId?: boolean
+    sortingOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     zap?: boolean | ZapDefaultArgs<ExtArgs>
@@ -5046,6 +5088,7 @@ export namespace Prisma {
     id?: boolean
     actionId?: boolean
     zapId?: boolean
+    sortingOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     zap?: boolean | ZapDefaultArgs<ExtArgs>
@@ -5056,6 +5099,7 @@ export namespace Prisma {
     id?: boolean
     actionId?: boolean
     zapId?: boolean
+    sortingOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     zap?: boolean | ZapDefaultArgs<ExtArgs>
@@ -5066,11 +5110,12 @@ export namespace Prisma {
     id?: boolean
     actionId?: boolean
     zapId?: boolean
+    sortingOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ActionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "actionId" | "zapId" | "createdAt" | "updatedAt", ExtArgs["result"]["action"]>
+  export type ActionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "actionId" | "zapId" | "sortingOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["action"]>
   export type ActionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     zap?: boolean | ZapDefaultArgs<ExtArgs>
     type?: boolean | AvailableActionDefaultArgs<ExtArgs>
@@ -5094,6 +5139,7 @@ export namespace Prisma {
       id: string
       actionId: string
       zapId: string
+      sortingOrder: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["action"]>
@@ -5524,6 +5570,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Action", 'String'>
     readonly actionId: FieldRef<"Action", 'String'>
     readonly zapId: FieldRef<"Action", 'String'>
+    readonly sortingOrder: FieldRef<"Action", 'Int'>
     readonly createdAt: FieldRef<"Action", 'DateTime'>
     readonly updatedAt: FieldRef<"Action", 'DateTime'>
   }
@@ -10224,6 +10271,7 @@ export namespace Prisma {
     id: 'id',
     actionId: 'actionId',
     zapId: 'zapId',
+    sortingOrder: 'sortingOrder',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -10346,6 +10394,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -10360,16 +10422,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'Float[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -10545,6 +10607,7 @@ export namespace Prisma {
     id?: StringFilter<"Action"> | string
     actionId?: StringFilter<"Action"> | string
     zapId?: StringFilter<"Action"> | string
+    sortingOrder?: IntFilter<"Action"> | number
     createdAt?: DateTimeFilter<"Action"> | Date | string
     updatedAt?: DateTimeFilter<"Action"> | Date | string
     zap?: XOR<ZapScalarRelationFilter, ZapWhereInput>
@@ -10555,6 +10618,7 @@ export namespace Prisma {
     id?: SortOrder
     actionId?: SortOrder
     zapId?: SortOrder
+    sortingOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     zap?: ZapOrderByWithRelationInput
@@ -10568,6 +10632,7 @@ export namespace Prisma {
     NOT?: ActionWhereInput | ActionWhereInput[]
     actionId?: StringFilter<"Action"> | string
     zapId?: StringFilter<"Action"> | string
+    sortingOrder?: IntFilter<"Action"> | number
     createdAt?: DateTimeFilter<"Action"> | Date | string
     updatedAt?: DateTimeFilter<"Action"> | Date | string
     zap?: XOR<ZapScalarRelationFilter, ZapWhereInput>
@@ -10578,11 +10643,14 @@ export namespace Prisma {
     id?: SortOrder
     actionId?: SortOrder
     zapId?: SortOrder
+    sortingOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ActionCountOrderByAggregateInput
+    _avg?: ActionAvgOrderByAggregateInput
     _max?: ActionMaxOrderByAggregateInput
     _min?: ActionMinOrderByAggregateInput
+    _sum?: ActionSumOrderByAggregateInput
   }
 
   export type ActionScalarWhereWithAggregatesInput = {
@@ -10592,6 +10660,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Action"> | string
     actionId?: StringWithAggregatesFilter<"Action"> | string
     zapId?: StringWithAggregatesFilter<"Action"> | string
+    sortingOrder?: IntWithAggregatesFilter<"Action"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Action"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Action"> | Date | string
   }
@@ -10966,6 +11035,7 @@ export namespace Prisma {
 
   export type ActionCreateInput = {
     id?: string
+    sortingOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     zap: ZapCreateNestedOneWithoutActionInput
@@ -10976,12 +11046,14 @@ export namespace Prisma {
     id?: string
     actionId: string
     zapId: string
+    sortingOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type ActionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sortingOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     zap?: ZapUpdateOneRequiredWithoutActionNestedInput
@@ -10992,6 +11064,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     actionId?: StringFieldUpdateOperationsInput | string
     zapId?: StringFieldUpdateOperationsInput | string
+    sortingOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11000,12 +11073,14 @@ export namespace Prisma {
     id?: string
     actionId: string
     zapId: string
+    sortingOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type ActionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sortingOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11014,6 +11089,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     actionId?: StringFieldUpdateOperationsInput | string
     zapId?: StringFieldUpdateOperationsInput | string
+    sortingOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11440,6 +11516,17 @@ export namespace Prisma {
     zapId?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type AvailableActionScalarRelationFilter = {
     is?: AvailableActionWhereInput
     isNot?: AvailableActionWhereInput
@@ -11449,14 +11536,20 @@ export namespace Prisma {
     id?: SortOrder
     actionId?: SortOrder
     zapId?: SortOrder
+    sortingOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type ActionAvgOrderByAggregateInput = {
+    sortingOrder?: SortOrder
   }
 
   export type ActionMaxOrderByAggregateInput = {
     id?: SortOrder
     actionId?: SortOrder
     zapId?: SortOrder
+    sortingOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11465,8 +11558,29 @@ export namespace Prisma {
     id?: SortOrder
     actionId?: SortOrder
     zapId?: SortOrder
+    sortingOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type ActionSumOrderByAggregateInput = {
+    sortingOrder?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type AvailableActionCountOrderByAggregateInput = {
@@ -11847,6 +11961,14 @@ export namespace Prisma {
     connect?: AvailableActionWhereUniqueInput
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type ZapUpdateOneRequiredWithoutActionNestedInput = {
     create?: XOR<ZapCreateWithoutActionInput, ZapUncheckedCreateWithoutActionInput>
     connectOrCreate?: ZapCreateOrConnectWithoutActionInput
@@ -12115,6 +12237,33 @@ export namespace Prisma {
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
@@ -12207,6 +12356,7 @@ export namespace Prisma {
 
   export type ActionCreateWithoutZapInput = {
     id?: string
+    sortingOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     type: AvailableActionCreateNestedOneWithoutActionsInput
@@ -12215,6 +12365,7 @@ export namespace Prisma {
   export type ActionUncheckedCreateWithoutZapInput = {
     id?: string
     actionId: string
+    sortingOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12322,6 +12473,7 @@ export namespace Prisma {
     id?: StringFilter<"Action"> | string
     actionId?: StringFilter<"Action"> | string
     zapId?: StringFilter<"Action"> | string
+    sortingOrder?: IntFilter<"Action"> | number
     createdAt?: DateTimeFilter<"Action"> | Date | string
     updatedAt?: DateTimeFilter<"Action"> | Date | string
   }
@@ -12568,6 +12720,7 @@ export namespace Prisma {
 
   export type ActionCreateWithoutTypeInput = {
     id?: string
+    sortingOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     zap: ZapCreateNestedOneWithoutActionInput
@@ -12576,6 +12729,7 @@ export namespace Prisma {
   export type ActionUncheckedCreateWithoutTypeInput = {
     id?: string
     zapId: string
+    sortingOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12816,6 +12970,7 @@ export namespace Prisma {
   export type ActionCreateManyZapInput = {
     id?: string
     actionId: string
+    sortingOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12829,6 +12984,7 @@ export namespace Prisma {
 
   export type ActionUpdateWithoutZapInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sortingOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: AvailableActionUpdateOneRequiredWithoutActionsNestedInput
@@ -12837,6 +12993,7 @@ export namespace Prisma {
   export type ActionUncheckedUpdateWithoutZapInput = {
     id?: StringFieldUpdateOperationsInput | string
     actionId?: StringFieldUpdateOperationsInput | string
+    sortingOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12844,6 +13001,7 @@ export namespace Prisma {
   export type ActionUncheckedUpdateManyWithoutZapInput = {
     id?: StringFieldUpdateOperationsInput | string
     actionId?: StringFieldUpdateOperationsInput | string
+    sortingOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12874,12 +13032,14 @@ export namespace Prisma {
   export type ActionCreateManyTypeInput = {
     id?: string
     zapId: string
+    sortingOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type ActionUpdateWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sortingOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     zap?: ZapUpdateOneRequiredWithoutActionNestedInput
@@ -12888,6 +13048,7 @@ export namespace Prisma {
   export type ActionUncheckedUpdateWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
     zapId?: StringFieldUpdateOperationsInput | string
+    sortingOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12895,6 +13056,7 @@ export namespace Prisma {
   export type ActionUncheckedUpdateManyWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
     zapId?: StringFieldUpdateOperationsInput | string
+    sortingOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
