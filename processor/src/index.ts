@@ -11,6 +11,7 @@ const kafka = new Kafka({
     clientId: "outbox-processor", 
     brokers: ["localhost:9092"],    
 })
+const TOPIC_NAME = "zap-event";
 
 async function main() {
     const producer = kafka.producer();
@@ -22,7 +23,7 @@ async function main() {
     })
 
     producer.send({
-        topic: "outbox",    
+        topic: TOPIC_NAME,    
         messages: pendingRows.map( r => {
             return {
                 value: r.zapRunId
