@@ -17,4 +17,12 @@ router.get("/zap",authMiddleware, (req, res) => {
 }
 );
 
+router.get("/:zapId",authMiddleware, (req, res) => {
+    const zapId = req.params.zapId;
+
+    console.log("zap route hit", zapId);
+    res.status(200).json({ message: "Zap successful", zapId }); 
+}
+);
+
 export const zapRouter = router;
