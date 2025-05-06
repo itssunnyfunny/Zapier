@@ -1,11 +1,15 @@
 import { Router } from "express";
 import { authMiddleware } from "../middleware";
+import { SignupSchema } from "../types";
 
 const router = Router();
 
 router.post("/signup", (req, res) => {  
-    console.log("signup route hit");
-    res.status(200).json({ message: "User signed up" });    
+    const body = req.body;
+     const parsedBody = SignupSchema.safeParse(body);
+    if (!parsedBody.success) {
+        return res.status(400).json({ error: parsedBody.error.errors });
+    }
 
 }
 );
