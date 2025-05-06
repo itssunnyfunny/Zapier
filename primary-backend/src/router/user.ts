@@ -82,7 +82,7 @@ router.post("/signin", async(req, res) => {
 }
 );
 // @ts-ignore
-router.get("/user", authMiddleware, async(req, res) => {
+router.get("/", authMiddleware, async(req, res) => {
      //@ts-ignore
       const userId = req.id; 
       const user = await prismaClient.user.findFirst({

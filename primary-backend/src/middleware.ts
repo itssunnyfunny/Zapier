@@ -1,7 +1,22 @@
 import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "./config";
 
 export function authMiddleware(req:Request, res:Response, next:NextFunction) {
-    // Middleware logic to authenticate the user
-    console.log("Auth middleware hit");
-    next();
+    const token = req.headers.authorization as unknown as string;
+
+    try { 
+    const paylaod = jwt.verify(token, JWT_SECRET) ;
+    if (paylaod) {
+        //@ts-ignore
+        req.id = paylaod.id;
+        next();
+    } 
+    } catch (error) {
+        return res.status(401).json({
+            message: "Unauthorized",
+        });
+        
+    }
+   
 }
