@@ -44,13 +44,13 @@ export default function() {
 
                     <div className="pt-4">
                         <PrimaryButton onClick={async () => {
-                            const res = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, {
+                            const res = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, {
                                 username: email,
                                 password,
                             });
                             localStorage.setItem("token", res.data.token);
                             router.push("/dashboard");
-                        }} size="large">Get started free</PrimaryButton>
+                        }} size="large">Login</PrimaryButton>
                     </div>
                 </div>
             </div>
