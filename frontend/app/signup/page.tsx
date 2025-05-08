@@ -2,6 +2,8 @@
 import  Appbar  from "@/components/Appbar";
 import { CheckFeature } from "@/components/CheckFearture";
 import { Input } from "@/components/Input";
+import { BACKEND_URL } from "../confing";
+import axios from "axios";
 import  PrimaryButton  from "@/components/buttons/PrimaryButton";
 
 import { useState } from "react";
@@ -44,12 +46,12 @@ export default function() {
 
                     <div className="pt-4">
                         <PrimaryButton onClick={async () => {
-                            // const res = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, {
-                            //     username: email,
-                            //     password,
-                            //     name
-                            // });
-                            // router.push("/login");
+                            const res = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, {
+                                username: email,
+                                password,
+                                name
+                            });
+                            router.push("/login");
                         }} size="large">Get started free</PrimaryButton>
                     </div>
                 </div>
