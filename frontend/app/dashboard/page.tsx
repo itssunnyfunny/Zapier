@@ -99,3 +99,7 @@ function ZapTable({ zaps }: {zaps: Zap[]}) {
         </div>)}
     </div>
 }
+
+     function somethinng(ids:string) {
+        return true;
+     }
