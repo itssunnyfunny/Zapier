@@ -100,6 +100,22 @@ function ZapTable({ zaps }: {zaps: Zap[]}) {
     </div>
 }
 
+function Zap({ zap }: {zap: Zap}) {
+    return <div>
+        <div>{zap.id}</div>
+        <div>{zap.trigger.type.name}</div>
+        <div>{zap.actions.map(x => x.type.name).join(", ")}</div>
+    </div>
+} 
+    
+
+
      function somethinng(ids:string) {
         return true;
+     }
+
+     function ZapTrigger({ trigger }: {trigger: Zap["trigger"]}) {
+        return <div>
+            <div>{trigger.type.name}</div>
+        </div>
      }
